@@ -91,7 +91,7 @@ Here all of our meetings should be merged together into just Meeting(1, 10). We 
 
 Make sure that your function won't "leave out" the last meeting.
 
-We can do this in O(n\lg{n})O(nlgn) time.
+We can do this in O(nlgn) time.
 
 ## Solution
 
