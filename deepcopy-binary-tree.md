@@ -2,27 +2,17 @@
 
 Write both recursive and iterative version.
 
+The tree node structure is as follows.
 ```c++
-#include <iostream>
-#include <string>
-#include <stack>
-
-using namespace std;
-
 typedef struct Node {
     int val;
     struct Node * left;
     struct Node *right;
 }Node;
+```
+The recursive version of the deep copy is very similar to pre order traversal, where instead of visiting the node we copy the node we visit everytime.
 
-void preorder(Node *root)
-{
-    if(root==NULL) return;
-    cout << root->val << " ";
-    preorder(root->left);
-    preorder(root->right);    
-}
-
+```c++
 Node* deepCopyRec(Node *root)
 {
     if(root==NULL) return NULL;
@@ -32,7 +22,10 @@ Node* deepCopyRec(Node *root)
     node->right = deepCopyRec(root->right);
     return node;
 }
+```
+The iterative version can make use of two stacks, one for traversing the source tree and and another for keeping track of the copied tree. The second stack is is very crucial as only traversing and copying the nodes from the given tree is not enough. We need to know where the newly copied tree should be linked to. The code looks as follows.
 
+```c++
 Node* deepCopyIter(Node *root)
 {
     if(root==NULL) return NULL;
@@ -104,7 +97,6 @@ int main()
   preorder(root);
   cout << '\n';
   preorder(copy);  
-  return 0;
-  
+  return 0;  
 }
 ```
