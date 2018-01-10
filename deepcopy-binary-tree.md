@@ -2,6 +2,8 @@
 
 Write both recursive and iterative version.
 
+Why this question is important? Basically this a good question to test one's knowledge data structure, recursion and how the recursion actually implemented in the backend using stacks. Also this is a little modification on the popular tree traversal algorithm. So this shows how one can use their knowledge.
+
 The tree node structure is as follows.
 ```c++
 typedef struct Node {
@@ -23,7 +25,7 @@ Node* deepCopyRec(Node *root)
     return node;
 }
 ```
-The iterative version can make use of two stacks, one for traversing the source tree and and another for keeping track of the copied tree. The second stack is is very crucial as only traversing and copying the nodes from the given tree is not enough. We need to know where the newly copied tree should be linked to. The code looks as follows.
+The iterative version can make use of two stacks, one for traversing the source tree and and another for keeping track of the copied tree. The second stack is very crucial as only traversing and copying the nodes from the given tree is not enough. We also need to know where the newly copied node should be linked to. Second stack helps in that. The code looks as follows.
 
 ```c++
 Node* deepCopyIter(Node *root)
