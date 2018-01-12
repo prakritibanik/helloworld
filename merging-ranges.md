@@ -3,7 +3,7 @@
 To do this, you’ll need to know when any team is having a meeting. In HiCal, a meeting is stored as an instance of a Meeting class with integer member variables startTime and endTime. These integers represent the number of 30-minute blocks past 9:00am.
 
 ```c++
-  class Meeting
+class Meeting
 {
 private:
         // number of 30 min blocks past 9:00 am
