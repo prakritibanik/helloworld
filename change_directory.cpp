@@ -19,7 +19,7 @@ Return the new directory as string
 #include <string>
 #include <stack>
 
-using namespace std;
+using namespace std; // for interview purpose
 
 void getToken(const string& dir, vector<string>& tokens)
 {
