@@ -1,23 +1,8 @@
 ## Write a function to find the rectangular intersection of two given rectangles.
 
-The rectangles are always "straight" and never "diagonal." More rigorously: each side is parallel with either the x-axis or the y-axis. They are defined as dictionaries like this:
+The rectangles are always "straight" and never "diagonal." More rigorously: each side is parallel with either the x-axis or the y-axis.
 
-```python
-
-my_rectangle = {
-
-    # Coordinates of bottom-left corner
-    'left_x'   : 1,
-    'bottom_y' : 1,
-
-    # Width and height
-    'width'    : 6,
-    'height'   : 3,
-
-}
-```
- 
-### Solution C++
+### The Rectangle Class C++
 ```c++
 include <iostream>
 #include <algorithm>
@@ -95,7 +80,10 @@ ostream& operator<<(ostream& os, const Rectangle& rect)
         << ", width: " << rect.getWidth() << ", height: " << rect.getHeight() << ")";
     return os;
 }
+```
 
+### Solution 1
+```c++
 bool findOverlap(int point1, int length1, int point2, int length2, int& p, int& length)
 {
     p = 0;
@@ -134,9 +122,48 @@ Rectangle findRectangularOverlap(const Rectangle& rect1, const Rectangle& rect2)
     Rectangle rect(x, y, w, h);
     return rect;
 }
+```
+The above solution seems a little messy. We are calling findOverlap twice. Lets make it little more simpler in next solution
+### Solution 2
+```c++
+bool findOverlap(int point1, int length1, int point2, int length2, int& p, int& length)
+{
+    p = 0;
+    length = 0;
+    bool overlap = false;
+    int maxStart = std::max(point1, point2);
+    int minEnd = std::min(point1+length1, point2+length2);
+    if (maxStart < minEnd)
+    {
+        p = maxStart;
+        length = minEnd - maxStart;
+        overlap = true;
+    }
+    return overlap;
+}
 
+Rectangle findRectangularOverlap(const Rectangle& rect1, const Rectangle& rect2)
+{
+    // calculate the overlap between the two rectangles
+    int x=0, y=0, w=0, h=0;
+    bool vertical = false;
+    
+    if (findOverlap(rect1.getLeftX(), rect1.getWidth(), rect2.getLeftX(), rect2.getWidth(), x, w)) {
+        vertical = findOverlap(rect1.getBottomY(), rect1.getHeight(),
+                                    rect2.getBottomY(), rect2.getHeight(), y, h);
+    }
+    
+    if (!vertical) {
+        x = 0;
+        w = 0;
+    }
+    Rectangle rect(x, y, w, h);
+    return rect;
+}
+```
 
-
+Some test cases for the above
+```c++
 // tests
 
 const lest::test tests[] = {
@@ -197,8 +224,24 @@ int main(int argc, char** argv)
 }
 ```
 
-### Python
+### The Python class
 
+The Rectangle class looks like
+```python
+
+my_rectangle = {
+
+    # Coordinates of bottom-left corner
+    'left_x'   : 1,
+    'bottom_y' : 1,
+
+    # Width and height
+    'width'    : 6,
+    'height'   : 3,
+
+}
+```
+### Solution
 ```python
 def find_range_overlap(point1, length1, point2, length2):
     # Find the highest start point and lowest end point.
